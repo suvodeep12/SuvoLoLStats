@@ -1,9 +1,14 @@
 from riotwatcher import LolWatcher, ApiError
 import pandas as pd
+import os
+from dotenv import load_dotenv
 
 # global variables
-api_key = 'RGAPI-d396351a-0a22-4d9d-908c-1fac160df058'
-watcher = LolWatcher(api_key)
+
+# api = os.getenv('API_KEY')
+# print(api)
+api = "RGAPI-d396351a-0a22-4d9d-908c-1fac160df058"
+watcher = LolWatcher(api)
 my_region = 'sg2'
 
 #Define my profile
@@ -12,7 +17,7 @@ me = watcher.summoner.by_name(my_region, 'Suvo')
 
 #Get ranked stats
 my_ranked_stats = watcher.league.by_summoner(my_region, me['id'])
-# print(my_ranked_stats)
+print(my_ranked_stats)
 
 #Get latest version
 latest = watcher.data_dragon.versions_for_region(my_region)['n']['champion']
@@ -20,10 +25,16 @@ latest = watcher.data_dragon.versions_for_region(my_region)['n']['champion']
 static_champ_list = watcher.data_dragon.champions(latest, False, 'en_US')
 
 # champ static list data to dict for looking up
+champ_list = []
 champ_dict = {}
 
-print(static_champ_list['data'])
+# print(type(static_champ_list['data']))
 
-# for key in static_champ_list['data']:
-#     row = static_champ_list['data'][key]
-#     champ_dict[row['key']] = row['id']
+for key in static_champ_list['data'].keys():
+    champ_list.append(key)
+
+for key in static_champ_list['data'].keys():
+    if key in champ_list:
+        champ_dict[static_champ_list['data'][key]['key']] = key
+
+# print(champ_dict)
