@@ -5,9 +5,8 @@ from dotenv import load_dotenv
 
 # global variables
 
-# api = os.getenv('API_KEY')
-# print(api)
-api = "RGAPI-d396351a-0a22-4d9d-908c-1fac160df058"
+api = os.getenv('API_KEY')
+print(api)
 watcher = LolWatcher(api)
 my_region = 'sg2'
 
