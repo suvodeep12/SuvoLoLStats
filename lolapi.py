@@ -52,21 +52,35 @@ participants = []
 for row in match_detail['info']['participants']:
     participants_row = {}
     participants_row['champion'] = row['championId']
+    participants_row['championName'] = row['championName']
     participants_row['summonerspell1'] = row['summoner1Id']
     participants_row['summonerspell2'] = row['summoner2Id']
     participants_row['win'] = row['win']
     participants_row['kills'] = row['kills']
     participants_row['deaths'] = row['deaths']
     participants_row['assists'] = row['assists']
+    participants_row['kda'] = ((row['kills'] + row['assists']) / row['deaths'])
     participants_row['totalDamageDealt'] = row['totalDamageDealt']
     participants_row['goldEarned'] = row['goldEarned']
     participants_row['champLevel'] = row['champLevel']
     participants_row['totalMinionsKilled'] = row['totalMinionsKilled']
     participants_row['item0'] = row['item0']
     participants_row['item1'] = row['item1']
+    if row['teamPosition'] == 'TOP':
+        participants_row['position'] = 'TOP'
+    if row['teamPosition'] == 'JUNGLE':
+        participants_row['position'] =  'JUNGLE'  
+    if row['teamPosition'] == 'MIDDLE':
+        participants_row['position'] =  'MID'
+    if row['teamPosition'] == 'BOTTOM':
+        participants_row['position'] =  'ADC'
+    if row['teamPosition'] == 'UTILITY':
+        participants_row['position'] = 'SUPPORT'
     participants.append(participants_row)
 
 # print(participants)
 
 df = pd.DataFrame(participants)
-print(df)
+print(df)   
+
+# print(participants_row['position'])
