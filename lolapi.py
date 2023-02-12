@@ -51,6 +51,7 @@ participants = []
 # print(match_detail['info']['participants'])
 for row in match_detail['info']['participants']:
     participants_row = {}
+    participants_row['summonerName'] = row['summonerName']
     participants_row['champion'] = row['championId']
     participants_row['championName'] = row['championName']
     participants_row['summonerspell1'] = row['summoner1Id']
@@ -59,6 +60,7 @@ for row in match_detail['info']['participants']:
     participants_row['kills'] = row['kills']
     participants_row['deaths'] = row['deaths']
     participants_row['assists'] = row['assists']
+    # participants_row['kda'] = row['kda']
     participants_row['kda'] = ((row['kills'] + row['assists']) / row['deaths'])
     participants_row['totalDamageDealt'] = row['totalDamageDealt']
     participants_row['goldEarned'] = row['goldEarned']
